@@ -1,0 +1,3 @@
+module SimpleReports::Render
+
+end
