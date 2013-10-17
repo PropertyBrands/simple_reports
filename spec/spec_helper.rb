@@ -43,3 +43,18 @@ def basic_table
     rows: [row1, row2], header: ['Col1', 'Col2'], title: 'Table Title'
   )
 end
+
+def multi_format_report
+  SimpleReports::Report.new(tables: [multi_format_table], title: 'Multiformat')
+end
+
+def multi_format_table
+  t = SimpleReports::Table.new(
+    header: ['Noop', 'String', 'Date', '$'],
+    format: [:noop, :string, :date_time, :currency],
+    title: 'Table Title'
+  )
+  t.add_row [1, 'hello', Date.new(2000, 1, 1), 1234.56]
+  t.add_row [nil, 'world', Date.new(2050, 12, 31), 12345678.90]
+  t
+end

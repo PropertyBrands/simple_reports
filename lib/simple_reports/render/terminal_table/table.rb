@@ -13,6 +13,15 @@ module SimpleReports::Render::TerminalTable
       terminal_table.to_s
     end
 
+    # @api private
+    def cell_to_terminal_table_cell(cell)
+      if cell.format && (format = SimpleReports.formats[cell.format])
+        { value: cell.content, alignment: format.alignment }
+      else
+        cell.content
+      end
+    end
+
     private
 
     # @api private
@@ -25,7 +34,7 @@ module SimpleReports::Render::TerminalTable
 
     # @api private
     def table_rows
-      table.rows.map { |r| r.cells.map { |c| c.content } }
+      table.rows.map { |r| r.cells.map { |c| cell_to_terminal_table_cell(c) } }
     end
 
   end

@@ -17,42 +17,27 @@ describe SimpleReports::TableFormatter do
       subject.format_table!
     end
 
+    it "updates the cell's format option" do
+      expect(table.rows[0].cells[0].format).to eq :currency
+    end
+
     it "formats the cells in the table" do
       expect(table.rows[0].cells[0].content).to eq '$1.23'
       expect(table.rows[0].cells[1].content).to eq '2000-01-01'
     end
   end
 
-  describe "#format_cell!" do
-    let(:cell) { SimpleReports::Cell.new(content: 'hello') }
-    before { subject.stub(:format_cell).with(cell, 0).and_return('formatted') }
-    it "updates the cell's content with the formatted content" do
-      expect(subject.format_cell!(cell, 0)).to eq 'formatted'
-      expect(cell.content).to eq 'formatted'
-    end
-  end
-
-  describe "#format_cell" do
-    let(:cell) { SimpleReports::Cell.new(content: 'hello') }
-    let(:format_name) { :format_name }
-    let(:format_mock) {
-      mock = double('Formatter')
-      mock.should_receive(:to_formatter).and_return(formatter_mock)
-      mock
-    }
-    let(:formatter_mock) {
-      mock = double('Formatter')
-      mock.should_receive(:format).with('hello').and_return('formatted')
-      mock
-    }
+  describe "#set_cell_format_option!" do
+    let(:cell) { SimpleReports::Cell.new }
+    let(:index) { 0 }
 
     before do
-      subject.stub(:format_name).with(cell, 0).and_return(format_name)
-      SimpleReports.formats[format_name] = format_mock
+      subject.stub(:format_name).with(cell, index).and_return(:format_name)
+      subject.set_cell_format_option!(cell, index)
     end
 
-    it "formats the cell content using the formatter referenced by the format name" do
-      expect(subject.format_cell(cell, 0)).to eq 'formatted'
+    it "sets the format name on the cell" do
+      expect(cell.format).to eq :format_name
     end
   end
 
@@ -75,6 +60,39 @@ describe SimpleReports::TableFormatter do
 
     context "when no format set by cell or table" do
       it { should eq :noop }
+    end
+  end
+
+  describe "#format_cell!" do
+    let(:cell) { SimpleReports::Cell.new(content: 'hello') }
+    before { subject.stub(:format_cell).with(cell).and_return('formatted') }
+    it "updates the cell's content with the formatted content" do
+      expect(subject.format_cell!(cell)).to eq 'formatted'
+      expect(cell.content).to eq 'formatted'
+    end
+  end
+
+  describe "#format_cell" do
+    let(:cell) { SimpleReports::Cell.new(content: 'hello', format: format_name) }
+    let(:format_name) { :format_name }
+    let(:format_mock) {
+      mock = double('Formatter')
+      mock.should_receive(:to_formatter).and_return(formatter_mock)
+      mock
+    }
+    let(:formatter_mock) {
+      mock = double('Formatter')
+      mock.should_receive(:format).with('hello').and_return('formatted')
+      mock
+    }
+
+    before do
+      subject.stub(:format_name).with(cell).and_return(format_name)
+      SimpleReports.formats[format_name] = format_mock
+    end
+
+    it "formats the cell content using the formatter referenced by the format name" do
+      expect(subject.format_cell(cell)).to eq 'formatted'
     end
   end
 
