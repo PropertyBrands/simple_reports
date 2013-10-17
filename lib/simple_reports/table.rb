@@ -1,10 +1,13 @@
 module SimpleReports
   class Table
 
+    class RowsNotProvidedError < Exception; end
+
     attr_reader :options
 
     def initialize(options = {})
       @options = options
+      @rows = options[:rows] || []
     end
 
     def title
@@ -21,8 +24,30 @@ module SimpleReports
       options[:format] || [] # TODO: test nil returns []
     end
 
+    # The rows for this table.
+    #
+    # If @rows is empty, the we call +build_rows+ to add items to the @rows
+    # array. This method must be defined by a subclass, otherwise an error is
+    # thrown.
+    #
+    # If you want to be able to pass rows as an option upon initialization of
+    # the table, but don't want an error to be thrown because the array is
+    # empty, simply override the +rows+ method to just return @rows.
     def rows
-      options.fetch(:rows)
+      if @rows.empty?
+        build_rows
+      end
+      @rows
+    end
+
+    def build_rows
+      raise RowsNotProvidedError.
+        new('Implement build_rows or pass rows to the constructor')
+    end
+
+    def add_row(cells, options = {})
+      @rows ||= []
+      @rows << SimpleReports::Row.new(options.merge(cells: cells))
     end
 
     # Formats the table's cell contents.

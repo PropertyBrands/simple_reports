@@ -4,8 +4,31 @@ describe SimpleReports::Table do
   let(:options) { { } }
   subject { described_class.new(options) }
 
-  it_behaves_like "option defaults", [:title, :header, :rows]
+  it_behaves_like "option defaults", [:title, :header]
   it_behaves_like "optional option defaults", [:format]
+
+  describe "#rows" do
+    context "when none provided" do
+      before { subject.should_receive(:build_rows).once }
+      it "should call build_rows to build the rows" do
+        subject.rows
+      end
+    end
+
+    context "when rows provided" do
+      let(:options) { { rows: ['row1'] } }
+      it "returns the rows" do
+        expect(subject.rows).to eq ['row1']
+      end
+    end
+  end
+
+  describe "#build_rows" do
+    it "raises an exception" do
+      expect { subject.build_rows }.
+        to raise_exception SimpleReports::Table::RowsNotProvidedError
+    end
+  end
 
   describe "#format!" do
     before do
