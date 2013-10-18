@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Winograd"]
-  s.date = "2013-10-17"
+  s.date = "2013-10-18"
   s.description = "TODO: longer description of your gem"
   s.email = "ryan@thewinograds.com"
   s.extra_rdoc_files = [
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/simple_reports.rb",
     "lib/simple_reports/cell.rb",
+    "lib/simple_reports/format.rb",
     "lib/simple_reports/formatters.rb",
     "lib/simple_reports/formatters/base_formatter.rb",
     "lib/simple_reports/formatters/currency_formatter.rb",
@@ -47,7 +48,10 @@ Gem::Specification.new do |s|
     "lib/simple_reports/row.rb",
     "lib/simple_reports/table.rb",
     "lib/simple_reports/table_formatter.rb",
+    "simple_reports.gemspec",
+    "spec/integration/terminal_table_integration_spec.rb",
     "spec/simple_reports/cell_spec.rb",
+    "spec/simple_reports/format_spec.rb",
     "spec/simple_reports/formatters/currency_formatter_spec.rb",
     "spec/simple_reports/formatters/date_time_formatter_spec.rb",
     "spec/simple_reports/formatters/noop_formatter_spec.rb",
