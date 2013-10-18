@@ -15,7 +15,7 @@ module SimpleReports::Render::TerminalTable
 
     # @api private
     def cell_to_terminal_table_cell(cell)
-      if cell.format && (format = SimpleReports.formats[cell.format])
+      if format = cell.format_object
         { value: cell.content, alignment: format.alignment }
       else
         cell.content

@@ -8,8 +8,15 @@ module SimpleReports::Render::HTML
     end
 
     def render
-      "<td>#{cell.content}</td>"
+      "<td#{attributes}>#{cell.content}</td>"
     end
 
+    private
+
+    def attributes
+      if format = cell.format_object
+        %{ class="align-#{format.alignment}"}
+      end
+    end
   end
 end

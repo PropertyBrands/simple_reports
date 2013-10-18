@@ -16,5 +16,10 @@ module SimpleReports
       options[:format]
     end
 
+    # TODO: test
+    def format_object
+      SimpleReports.formats[format]
+    end
+
   end
 end
