@@ -3,12 +3,13 @@ module SimpleReports::Render::HTML
 
     attr_reader :cell
 
-    def initialize(cell)
+    def initialize(cell, element = 'td')
       @cell = cell
+      @element = element
     end
 
     def render
-      "<td#{attributes}>#{cell.content}</td>"
+      "<#{@element}#{attributes}>#{cell.content}</#{@element}>"
     end
 
     private

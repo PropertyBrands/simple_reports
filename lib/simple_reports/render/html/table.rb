@@ -20,7 +20,11 @@ module SimpleReports::Render::HTML
     end
 
     def table_header
-      header = table.header.map { |h| "<th>#{h}</th>" }.join
+      header = table.header.each_with_index.map do |h, index|
+        header_cell = build_header_cell(h, index)
+        SimpleReports::Render::HTML::Cell.new(header_cell, 'th').render
+      end.join
+
       before_table_header << header << after_table_header
     end
 
@@ -35,5 +39,13 @@ module SimpleReports::Render::HTML
       "<tbody>#{tables}</tbody>"
     end
 
+    private
+
+    def build_header_cell(header_text, index)
+      SimpleReports::Cell.new(
+        content: header_text,
+        format: @table.format[index],
+      )
+    end
   end
 end

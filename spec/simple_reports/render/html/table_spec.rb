@@ -33,3 +33,19 @@ describe SimpleReports::Render::HTML::Table do
   end
 
 end
+
+describe SimpleReports::Render::HTML::Table, '#table_header' do
+  it "wraps the header columns in th's and applies formats" do
+    table = SimpleReports::Table.new(
+      header: ['Noop', '$'],
+      format: [:noop, :currency],
+    )
+    subject = SimpleReports::Render::HTML::Table.new(table)
+
+    result = subject.table_header
+
+    expect(
+      result
+    ).to eq '<thead><th class="align-left">Noop</th><th class="align-right">$</th></thead>'
+  end
+end
