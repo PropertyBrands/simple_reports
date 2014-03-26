@@ -8,7 +8,7 @@ module SimpleReports::Render::HTML
     end
 
     def render
-      [table_title, table_header, table_body].join
+      [table_title, '<table>', table_header, table_body, '</table>'].join
     end
 
     def table_title

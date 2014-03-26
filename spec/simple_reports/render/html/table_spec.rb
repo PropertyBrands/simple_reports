@@ -11,7 +11,7 @@ describe SimpleReports::Render::HTML::Table do
         table_title: 'title', table_header: 'header', table_body: 'body'
       )
     end
-    its(:render) { should eq "titleheaderbody" }
+    its(:render) { should eq "title<table>headerbody</table>" }
   end
 
   describe "#table_title" do
