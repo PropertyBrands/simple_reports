@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/rylwin/simple_reports"
   gem.license = "MIT"
   gem.summary = %Q{Easily build reports}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{Easily build reports}
   gem.email = "ryan@thewinograds.com"
   gem.authors = ["Ryan Winograd"]
   # dependencies defined in Gemfile
