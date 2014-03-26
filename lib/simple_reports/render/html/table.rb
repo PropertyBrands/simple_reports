@@ -12,7 +12,7 @@ module SimpleReports::Render::HTML
     end
 
     def table_title
-      table.title
+      "<h3>#{table.title}</h3>"
     end
 
     def before_table_header
