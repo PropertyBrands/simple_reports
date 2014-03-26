@@ -72,5 +72,8 @@ module SimpleReports
       render_with(render_class)
     end
 
+    def to_a
+      [header] + @rows.map { |row| row.to_a }
+    end
   end
 end

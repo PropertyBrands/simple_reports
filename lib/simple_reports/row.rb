@@ -12,6 +12,10 @@ module SimpleReports
       options.fetch(:cells)
     end
 
+    def to_a
+      cells.map { |cell| cell.content }
+    end
+
     private
 
     def wrap_cells_in_cells!

@@ -74,3 +74,13 @@ describe SimpleReports::Table do
     end
   end
 end
+
+describe SimpleReports::Table, '#to_a' do
+  it 'builds a two-dimensional array containing the cell contents' do
+    subject = basic_table
+
+    result = subject.to_a
+
+    expect(result).to eq [['Col1', 'Col2'], ['A1', 'A2'], ['B1', 'B2']]
+  end
+end
