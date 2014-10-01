@@ -23,6 +23,10 @@ require 'simple_reports/formatters/string_formatter'
 
 require 'simple_reports/render'
 
+require 'simple_reports/render/csv'
+require 'simple_reports/render/csv/report'
+require 'simple_reports/render/csv/table'
+
 require 'simple_reports/render/terminal_table'
 require 'simple_reports/render/terminal_table/report'
 require 'simple_reports/render/terminal_table/table'

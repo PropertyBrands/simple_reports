@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ryan Winograd"]
-  s.date = "2014-03-26"
+  s.date = "2014-10-01"
   s.description = "Easily build reports"
   s.email = "ryan@thewinograds.com"
   s.extra_rdoc_files = [
@@ -36,6 +36,9 @@ Gem::Specification.new do |s|
     "lib/simple_reports/formatters/noop_formatter.rb",
     "lib/simple_reports/formatters/string_formatter.rb",
     "lib/simple_reports/render.rb",
+    "lib/simple_reports/render/csv.rb",
+    "lib/simple_reports/render/csv/report.rb",
+    "lib/simple_reports/render/csv/table.rb",
     "lib/simple_reports/render/html.rb",
     "lib/simple_reports/render/html/cell.rb",
     "lib/simple_reports/render/html/report.rb",
@@ -49,6 +52,7 @@ Gem::Specification.new do |s|
     "lib/simple_reports/table.rb",
     "lib/simple_reports/table_formatter.rb",
     "simple_reports.gemspec",
+    "spec/integration/csv_integration_spec.rb",
     "spec/integration/terminal_table_integration_spec.rb",
     "spec/simple_reports/cell_spec.rb",
     "spec/simple_reports/format_spec.rb",
